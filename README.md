@@ -12,7 +12,7 @@ seem to work due to permissions with using someone else's Kubernetes cluster and
 As a result, the exercise finished successfully by using the Docker Hub image repository instead.
 
 ## Kubernetes Tutorial
-Prior to commencing the actual exercise, the following videos were viewed:
+Prior to starting the actual exercise, the following videos were viewed:
 
 [Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU)
 [Kubernetes Tutorial For Beginners](https://www.youtube.com/watch?v=F-p_7XaEC84)
@@ -71,7 +71,7 @@ To create a new cluster something like the following should work:
 
 ## Working the the Azure ACR container registry 
 
-- Ensure you have an account with sufficient priviledges in Azure
+- Ensure you have an account with sufficient priviledges to create resources in Azure
 
 - Create the ACR
 
@@ -103,7 +103,24 @@ To create a new cluster something like the following should work:
 - List images in the ACR
 
     az acr repository list --name <acr-name> --username <acr-username> --password <acr-password> --output table
-    
+
+## Generate Secret for ACR access
+The Azure ACR images are private and thus requires a secret token for the Kubernetes service to access the images. 
+
+- To generate that token do the following:
+
+    kubectl create secret docker-registry <secret-name> --docker-server=<acr-login-server> --docker-username=<acr-username> --docker-password=<acr-password>
+
+- Verify secrets stored in the Kubernetes service:
+
+    kubectl get secrets
+
+    NOTE: the secret with name <secret-name> should show.
+
+- You can also get details about the secret:
+
+    kubectl describe secret <secret-name>
+
 
 ## Working the the Docker Hub container registry 
 By default kubernetes deployments assume a Docker Hub container registry, if a fully qualified one 
@@ -149,6 +166,11 @@ Before you deploy the application you need to modify the azure-vote-all-in-one-r
       containers:
       - name: azure-vote-front
         image: <acr-login-server>/azure-vote-front:v1
+        ...
+      imagePullSecrets:
+        - name: <secret-name>
+
+    NOTE: ensure that imagePullSecrets is at the same indentation level as containers and that it is specified after all the container properties!!!
 
 Once that is correctly set and saved you can actually perform the deploy of the app to the Kubernetes cluster:
 
@@ -158,11 +180,16 @@ Once that is correctly set and saved you can actually perform the deploy of the 
 
     kubectl get pods
 
-NOTE: should see something like:
+    NOTE: should see something like:
 
     NAME                                READY   STATUS    RESTARTS   AGE
     azure-vote-back-6d4b4776b6-nf7r6    1/1     Running   0          16h
     azure-vote-front-647868dd6c-2fwmn   1/1     Running   0          5m33s
+
+- You can get a description of the azure-vote-front pod by doing:
+
+    kubectl describe pod azure-vote-front-<XXXXX-YYYYY>
+
 
 ## Browse to the app
 If and after the application was successfully deployed then you should be able to browse to it.

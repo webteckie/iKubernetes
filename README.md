@@ -40,12 +40,6 @@ This exercise uses the voting application at the established tutorial link altho
     docker images
 
 
-## The Image Registry
-Since the most basic deployable unit of work to a kubernetes cluster is a docker image, we need to have a docker image
-registry to host these. The most popular and default option is [docker hub](hub.docker.com) But Azure also has a 
-Container Registry (a.k.a ACR). Here we will describe both registries.
-
-
 ## Setting up a Kubernetes cluster in Azure
 This part is TBD. An existing cluster was used for this exercise. To use someone else's cluster do:
 
@@ -65,7 +59,13 @@ To create a new cluster something like the following should work:
     az aks create --resource-group {existing-resource-group-name} --name {cluster-name} --node-count 2 --generate-ssh-keys
 
 
-## Working the the Azure ACR container registry 
+## The Image Registry
+Since the most basic deployable unit of work to a kubernetes cluster is a docker image, we need to have a docker image
+registry to host these. The most popular and default option is [docker hub](hub.docker.com) But Azure also has a 
+Container Registry (a.k.a ACR). Here we will describe both registries.
+
+
+### Working the the Azure ACR container registry 
 
 - Ensure you have an account with sufficient priviledges to create resources in Azure
 
@@ -100,7 +100,7 @@ To create a new cluster something like the following should work:
 
     az acr repository list --name {acr-name} --username {acr-username} --password {acr-password} --output table
 
-## Generate Secret for ACR access
+#### Generate Secret for ACR access
 The Azure ACR images are private and thus requires a secret token for the Kubernetes service to access the images. 
 
 - To generate that token do the following:
@@ -118,7 +118,7 @@ The Azure ACR images are private and thus requires a secret token for the Kubern
     kubectl describe secret {secret-name}
 
 
-## Working the the Docker Hub container registry 
+### Working the the Docker Hub container registry 
 By default kubernetes deployments assume a Docker Hub container registry, if a fully qualified one 
 (e.g., myacr.azureacr.io) is not specified. Here we describe how to setup your images in Docker Hub
 to be used as the registry for the Kubernetes cluster.

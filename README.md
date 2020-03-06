@@ -1,7 +1,10 @@
 # iKubernetes
 Describes some kubernetes learning resources. For this we will use the walk through at the following link as the basis for this learning:
 
-    https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app
+    [Kubernetes Docs](https://kubernetes.io/)
+    [Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU)
+    [Kubernetes Tutorial For Beginners](https://www.youtube.com/watch?v=F-p_7XaEC84)
+    [Kubernetes Hands-on Tutorial](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app)
 
 You can certainly follow all the instructions at that link and hopefully you will have a working system at the end. But this README summarizes the necessary steps to ensure a working application. 
 
@@ -11,13 +14,6 @@ NOTE: As of this writing, although everything worked with the use of an Azure AC
 seem to work due to permissions with using someone else's Kubernetes cluster and not having all the necessary permissions setup.
 As a result, the exercise finished successfully by using the Docker Hub image repository instead.
 
-## Kubernetes Tutorial
-Prior to starting the actual exercise, the following videos were viewed:
-
-[Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU)
-[Kubernetes Tutorial For Beginners](https://www.youtube.com/watch?v=F-p_7XaEC84)
-
-NOTE: there's plenty of Kubernetes and Docker tutorials and courses out there! So feel free to view any that seems useful to you.
 
 ## Azure CLI
 The Azure CLI is how most of the commands to Azure are performed.

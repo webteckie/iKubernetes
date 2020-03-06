@@ -1,10 +1,10 @@
 # iKubernetes
 Describes some kubernetes learning resources. For this we will use the walk through at the following link as the basis for this learning:
 
-    [Kubernetes Docs](https://kubernetes.io/)
-    [Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU)
-    [Kubernetes Tutorial For Beginners](https://www.youtube.com/watch?v=F-p_7XaEC84)
-    [Kubernetes Hands-on Tutorial](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app)
+[Kubernetes Docs](https://kubernetes.io/)
+[Kubernetes in 5 mins](https://www.youtube.com/watch?v=PH-2FfFD2PU)
+[Kubernetes Tutorial For Beginners](https://www.youtube.com/watch?v=F-p_7XaEC84)
+[Kubernetes Hands-on Tutorial](https://docs.microsoft.com/en-us/azure/aks/tutorial-kubernetes-prepare-app)
 
 You can certainly follow all the instructions at that link and hopefully you will have a working system at the end. But this README summarizes the necessary steps to ensure a working application. 
 
